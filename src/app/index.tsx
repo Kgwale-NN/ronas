@@ -1,6 +1,7 @@
 import { StyleSheet,Text,View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
+import DestinationHeaderImage from "@/components/DestinationHeader";
 
 export default function Screen(){
 
@@ -8,6 +9,7 @@ export default function Screen(){
 
     <SafeAreaView style={styles.screen}>
 
+      <DestinationHeaderImage image={require("../../assets/images/destination.jpg")} />
       <View style={styles.content}>
 
         <Text style={styles.label}>DESTINATION</Text>
