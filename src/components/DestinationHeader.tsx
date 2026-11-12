@@ -1,6 +1,7 @@
 import { View, Alert, Image, StyleSheet, Text } from "react-native";
 import CircleButton from "./CircleButton";
 import HeartIcon from "@/components/icons/HeartIcon";
+import BackIcon from "@/components/icons/BackIcon";
 
 type detinationHeaderProps = {
 
@@ -17,15 +18,14 @@ export default function DestinationHeaderImage({ image }: detinationHeaderProps)
             <Image source={image} style={styles.photo} />
 
             <View style={styles.buttons}>
-                
+
                 <CircleButton
                     label="Go back"
                     onPress={() =>
                         Alert.alert("Back", "We will add navigation later.")
                     }
                 >
-                    <Text style={{ fontSize: 28, color: "#191D1C" }}>‹</Text>
-                </CircleButton>
+                    <BackIcon size={24} color="#191D1C" />                </CircleButton>
 
                 <CircleButton
                     label="Save destination"
