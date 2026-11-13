@@ -5,6 +5,7 @@ import DestinationHeaderImage from "@/components/DestinationHeader";
 import RatingBadge from "@/components/RatingBadge";
 import ExpandableDescription from "@/components/ExpandableDescription";
 import SectionHeader from "@/components/SectionHeader";
+import TourCard from "@/components/TourCard";
 
 
 export default function Screen() {
@@ -58,6 +59,33 @@ export default function Screen() {
       Alert.alert("Upcoming tours", "We will add the full tour list later.")
     }
   />
+
+<ScrollView
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  contentContainerStyle={styles.tourList}
+>
+  <TourCard
+    image={require("../../assets/images/tour-brazil.jpg")}
+    name="Iconic Brazil"
+  />
+
+  <TourCard
+    image={require("../../assets/images/tour-beach.jpg")}
+    name="Tropical Escape"
+  />
+
+  <TourCard
+    image={require("../../assets/images/tour-mountains.jpg")}
+    name="Mountain Adventure"
+  />
+
+  <TourCard
+    image={require("../../assets/images/tour-forest.jpg")}
+    name="Forest Retreat"
+  />
+</ScrollView>
+
 </View>
 
           </View>
@@ -163,6 +191,12 @@ const styles = StyleSheet.create({
 
   toursSection: {
   marginTop: 24,
+},
+
+tourList: {
+  gap: 12,
+  paddingTop: 12,
+  paddingBottom: 8,
 },
 
 
