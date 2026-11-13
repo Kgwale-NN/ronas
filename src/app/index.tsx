@@ -3,6 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
 import DestinationHeaderImage from "@/components/DestinationHeader";
 import RatingBadge from "@/components/RatingBadge";
+import ExpandableDescription from "@/components/ExpandableDescription";
+
 
 export default function Screen() {
 
@@ -44,6 +46,8 @@ export default function Screen() {
               </View>
 
             </View>
+
+            <ExpandableDescription text="Rio de Janeiro, often simply called Rio, is one of Brazil’s most iconic cities. Explore its beaches, mountain views, and lively neighbourhoods. Discover local food and enjoy the sights at your own pace."/>
 
           </View>
 
