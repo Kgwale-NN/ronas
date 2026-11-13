@@ -7,12 +7,14 @@ type CircleButtonProps = {
     children: ReactNode;
     label: string;
     onPress: () => void;
+    backgroundColor?: string;
 };
 
 export default function CircleButton({
     children,
     label,
     onPress,
+    backgroundColor = travelColors.surface,
 }: CircleButtonProps) {
     return (
         <Pressable
@@ -21,6 +23,7 @@ export default function CircleButton({
             onPress={onPress}
             style={({ pressed }) => [
                 styles.button,
+                { backgroundColor },
                 pressed && styles.pressed,
             ]}
         >
@@ -34,7 +37,6 @@ const styles = StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 24,
-        backgroundColor: travelColors.surface,
         alignItems: "center",
         justifyContent: "center",
     },
