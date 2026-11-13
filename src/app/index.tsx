@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
 import DestinationHeaderImage from "@/components/DestinationHeader";
+import RatingBadge from "@/components/RatingBadge";
 
 export default function Screen() {
 
@@ -24,14 +25,31 @@ export default function Screen() {
 
           <View style={styles.content}>
 
-            <Text style={styles.label}>DESTINATION</Text>
-            <Text style={styles.title}>Rio de Janeiro</Text>
-            <Text style={styles.country}>Brazil</Text>
+            <View style={styles.destinationRow}>
+
+              <View style={styles.destinationInfo}>
+
+
+                <Text style={styles.label}>DESTINATION</Text>
+                <Text style={styles.title}>Rio de Janeiro</Text>
+                <Text style={styles.country}>Brazil</Text>
+
+              </View>
+
+              <View style={styles.ratingInfo}>
+
+                <RatingBadge rating={5} />
+                <Text style={styles.reviews}>143 reviews</Text>
+
+              </View>
+
+            </View>
 
           </View>
+
         </View>
-        
-        </ScrollView>
+
+      </ScrollView>
     </SafeAreaView>
 
   );
@@ -39,6 +57,27 @@ export default function Screen() {
 }
 
 const styles = StyleSheet.create({
+
+  destinationRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12,
+  },
+
+  destinationInfo: {
+    flex: 1,
+  },
+
+  ratingInfo: {
+    alignItems: "flex-end",
+    gap: 8,
+  },
+
+  reviews: {
+    fontSize: 14,
+    color: travelColors.text,
+    textDecorationLine: "underline",
+  },
 
   scroll: {
 
