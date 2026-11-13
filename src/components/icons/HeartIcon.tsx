@@ -1,13 +1,15 @@
 import Svg, { Path } from "react-native-svg";
 
 type HeartIconProps = {
-    size?: number;
-    color?: string;
+  size?: number;
+  color?: string;
+  filled?: boolean;
 };
 
 export default function HeartIcon({
-    size = 24,
-    color = "#191D1C",
+  size = 24,
+  color = "#191D1C",
+  filled = false,
 }: HeartIconProps) {
     return (
         <Svg
@@ -21,6 +23,7 @@ export default function HeartIcon({
                 stroke={color}
                 strokeWidth={1.5}
                 strokeLinejoin="round"
+                fill={filled ? color : "none"}
             />
         </Svg>
     );

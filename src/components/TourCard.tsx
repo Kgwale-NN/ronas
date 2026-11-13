@@ -1,6 +1,10 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import StarIcon from "@/components/icons/StarIcon";
 import { travelColors } from "@/constants/travel-theme";
+import { useState } from "react";
+
+import CircleButton from "@/components/CircleButton";
+import HeartIcon from "@/components/icons/HeartIcon";
 
 type TourCardProps = {
   image: number;
@@ -19,9 +23,27 @@ export default function TourCard({
   rating,
   reviews,
 }: TourCardProps) {
+
+  const [saved, setSaved] = useState(false);
+
   return (
     <View style={styles.card}>
-      <Image source={image} style={styles.photo} />
+      <View style={styles.photoContainer}>
+        <Image source={image} style={styles.photo} />
+
+        <View style={styles.saveButton}>
+          <CircleButton
+            label={saved ? "Remove saved tour" : "Save tour"}
+            onPress={() => setSaved(current => !current)}
+          >
+            <HeartIcon
+              size={24}
+              color={travelColors.text}
+              filled={saved}
+            />
+          </CircleButton>
+        </View>
+      </View>
 
       <Text style={styles.name}>{name}</Text>
 
@@ -89,6 +111,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: travelColors.muted,
     marginLeft: 4,
+  },
+
+  photoContainer: {
+    position: "relative",
+  },
+
+  saveButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 
 });
