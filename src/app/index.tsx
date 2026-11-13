@@ -1,4 +1,4 @@
-import { Alert,ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
 import DestinationHeaderImage from "@/components/DestinationHeader";
@@ -49,44 +49,52 @@ export default function Screen() {
 
             </View>
 
-            <ExpandableDescription text="Rio de Janeiro, often simply called Rio, is one of Brazil’s most iconic cities. Explore its beaches, mountain views, and lively neighbourhoods. Discover local food and enjoy the sights at your own pace."/>
+            <ExpandableDescription text="Rio de Janeiro, often simply called Rio, is one of Brazil’s most iconic cities. Explore its beaches, mountain views, and lively neighbourhoods. Discover local food and enjoy the sights at your own pace." />
 
-                 <View style={styles.toursSection}>
-  <SectionHeader
-    title="Upcoming tours"
-    actionLabel="See all"
-    onActionPress={() =>
-      Alert.alert("Upcoming tours", "We will add the full tour list later.")
-    }
-  />
+            <View style={styles.toursSection}>
+              <SectionHeader
+                title="Upcoming tours"
+                actionLabel="See all"
+                onActionPress={() =>
+                  Alert.alert("Upcoming tours", "We will add the full tour list later.")
+                }
+              />
 
-<ScrollView
-  horizontal
-  showsHorizontalScrollIndicator={false}
-  contentContainerStyle={styles.tourList}
->
-  <TourCard
-    image={require("../../assets/images/tour-brazil.jpg")}
-    name="Iconic Brazil"
-  />
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.tourList}
+              >
+                <TourCard
+                  image={require("../../assets/images/tour-brazil.jpg")}
+                  name="Iconic Brazil"
+                  days={8}
+                  price={659}
+                />
 
-  <TourCard
-    image={require("../../assets/images/tour-beach.jpg")}
-    name="Tropical Escape"
-  />
+                <TourCard
+                  image={require("../../assets/images/tour-beach.jpg")}
+                  name="Tropical Escape"
+                  days={5}
+                  price={499}
+                />
 
-  <TourCard
-    image={require("../../assets/images/tour-mountains.jpg")}
-    name="Mountain Adventure"
-  />
+                <TourCard
+                  image={require("../../assets/images/tour-mountains.jpg")}
+                  name="Mountain Adventure"
+                  days={7}
+                  price={749}
+                />
 
-  <TourCard
-    image={require("../../assets/images/tour-forest.jpg")}
-    name="Forest Retreat"
-  />
-</ScrollView>
+                <TourCard
+                  image={require("../../assets/images/tour-forest.jpg")}
+                  name="Forest Retreat"
+                  days={4}
+                  price={389}
+                />
+              </ScrollView>
 
-</View>
+            </View>
 
           </View>
 
@@ -190,16 +198,13 @@ const styles = StyleSheet.create({
   },
 
   toursSection: {
-  marginTop: 24,
-},
+    marginTop: 24,
+  },
 
-tourList: {
-  gap: 12,
-  paddingTop: 12,
-  paddingBottom: 8,
-},
-
-
-
+  tourList: {
+    gap: 12,
+    paddingTop: 12,
+    paddingBottom: 8,
+  },
 
 })
