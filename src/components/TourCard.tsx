@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-
+import StarIcon from "@/components/icons/StarIcon";
 import { travelColors } from "@/constants/travel-theme";
 
 type TourCardProps = {
@@ -7,6 +7,8 @@ type TourCardProps = {
   name: string;
   days: number;
   price: number;
+  rating: number;
+  reviews: number;
 };
 
 export default function TourCard({
@@ -14,6 +16,8 @@ export default function TourCard({
   name,
   days,
   price,
+  rating,
+  reviews,
 }: TourCardProps) {
   return (
     <View style={styles.card}>
@@ -24,6 +28,17 @@ export default function TourCard({
       <Text style={styles.details}>
         {days} days · From ${price}/person
       </Text>
+      <View style={styles.ratingRow}>
+        <StarIcon size={18} color={travelColors.text} />
+
+        <Text style={styles.rating}>
+          {rating.toFixed(1)}
+        </Text>
+
+        <Text style={styles.reviews}>
+          {reviews} reviews
+        </Text>
+      </View>
     </View>
   );
 }
@@ -51,9 +66,29 @@ const styles = StyleSheet.create({
   },
 
   details: {
-  fontSize: 14,
-  color: travelColors.muted,
-  marginHorizontal: 4,
-  marginBottom: 12,
-},
+    fontSize: 14,
+    color: travelColors.muted,
+    marginHorizontal: 4,
+    marginBottom: 12,
+  },
+
+  ratingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginHorizontal: 4,
+    marginBottom: 8,
+  },
+
+  rating: {
+    fontSize: 14,
+    color: travelColors.text,
+  },
+
+  reviews: {
+    fontSize: 14,
+    color: travelColors.muted,
+    marginLeft: 4,
+  },
+
 });

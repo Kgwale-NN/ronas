@@ -70,6 +70,8 @@ export default function Screen() {
                   name="Iconic Brazil"
                   days={8}
                   price={659}
+                  rating={4.6}
+                  reviews={56}
                 />
 
                 <TourCard
@@ -77,6 +79,8 @@ export default function Screen() {
                   name="Tropical Escape"
                   days={5}
                   price={499}
+                  rating={4.8}
+                  reviews={82}
                 />
 
                 <TourCard
@@ -84,6 +88,8 @@ export default function Screen() {
                   name="Mountain Adventure"
                   days={7}
                   price={749}
+                  rating={4.9}
+                  reviews={104}
                 />
 
                 <TourCard
@@ -91,6 +97,8 @@ export default function Screen() {
                   name="Forest Retreat"
                   days={4}
                   price={389}
+                  rating={4.7}
+                  reviews={38}
                 />
               </ScrollView>
 
