@@ -1,9 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert,ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
 import DestinationHeaderImage from "@/components/DestinationHeader";
 import RatingBadge from "@/components/RatingBadge";
 import ExpandableDescription from "@/components/ExpandableDescription";
+import SectionHeader from "@/components/SectionHeader";
 
 
 export default function Screen() {
@@ -48,6 +49,16 @@ export default function Screen() {
             </View>
 
             <ExpandableDescription text="Rio de Janeiro, often simply called Rio, is one of Brazil’s most iconic cities. Explore its beaches, mountain views, and lively neighbourhoods. Discover local food and enjoy the sights at your own pace."/>
+
+                 <View style={styles.toursSection}>
+  <SectionHeader
+    title="Upcoming tours"
+    actionLabel="See all"
+    onActionPress={() =>
+      Alert.alert("Upcoming tours", "We will add the full tour list later.")
+    }
+  />
+</View>
 
           </View>
 
@@ -149,6 +160,10 @@ const styles = StyleSheet.create({
 
 
   },
+
+  toursSection: {
+  marginTop: 24,
+},
 
 
 
