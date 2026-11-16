@@ -132,6 +132,7 @@ src/
     tours.tsx                  Full tour list
     tour/[id].tsx              Details for the tour named by its ID
   components/
+    TextAction.tsx             Text button with hover, focus, and tap feedback
     CircleButton.tsx           Reusable round button
     DestinationDetails.tsx     Shared full layout for Rio and every tour
     DestinationHeader.tsx      Large photo, back button, and heart
@@ -162,7 +163,7 @@ npx tsc --noEmit
 npm run lint
 ```
 
-The type check should finish without errors. If Expo reports no ESLint configuration, its lint command may offer to install the needed tools; internet access is required for that first setup. Lint setup is not yet committed in this repository.
+TypeScript and ESLint are configured in this project. Run both commands before submitting. ESLint uses the Expo configuration in `eslint.config.js`.
 
 Before pushing, manually check: all four tours open the correct details, back navigation works, both types of heart show alerts and fill, saved state matches between screens, Read more toggles, and See all shows every tour.
 
@@ -196,6 +197,28 @@ Review the staged files before committing. Avoid committing passwords, `.env` se
 - Heart, back, star, and arrow shapes come from [Central Icons](https://centralicons.com/) and were adapted for `react-native-svg`. Check the applicable Central Icons licence before redistributing or publishing its assets; repository code licensing does not replace third-party asset terms.
 - Built as a React Native learning project by [Kgwale-NN](https://github.com/Kgwale-NN).
 - See the repository's `LICENSE` file for project code terms.
+
+## Android APK submission
+
+The `preview` profile in `eas.json` requests an installable Android APK. The app package is `com.kgwalenn.ronas`. The Android preview APK has been built successfully.
+
+```bash
+npx eas-cli@latest login
+npx eas-cli@latest build:configure --platform android
+npx eas-cli@latest build --platform android --profile preview
+```
+
+Follow the Expo prompts to connect this local app to your Expo project and set up Android signing. Never commit signing keys or passwords. Download the APK after the build succeeds, install it on an Android phone, and check the app before submitting.
+
+Download the APK from the [Ronas APK Google Drive folder](https://drive.google.com/drive/folders/1MtKc6e56-8KuXzZ973fRPfkVOsU5BK96?usp=drive_link). Open the folder, select the APK file, and download it to an Android phone. An Android APK does not install on iPhone.
+
+## Screen sizes and interaction
+
+- Destination pages stay centred and at most 600 units wide on large web windows.
+- Narrow screens and large phone text settings can place the rating below the name.
+- Horizontal cards shrink on small screens; the full list fills the available width.
+- Text actions and round buttons change colour on mouse hover and keyboard focus.
+- Touch presses give visual feedback without needing a mouse.
 
 ## Possible next steps
 
