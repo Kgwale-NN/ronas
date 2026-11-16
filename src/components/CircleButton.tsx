@@ -8,6 +8,7 @@ type CircleButtonProps = {
     label: string;
     onPress: () => void;
     backgroundColor?: string;
+    selected?: boolean;
 };
 
 export default function CircleButton({
@@ -15,11 +16,13 @@ export default function CircleButton({
     label,
     onPress,
     backgroundColor = travelColors.surface,
+    selected,
 }: CircleButtonProps) {
     return (
         <Pressable
             accessibilityRole="button"
             accessibilityLabel={label}
+            accessibilityState={selected === undefined ? undefined : { selected }}
             onPress={onPress}
             style={({ pressed }) => [
                 styles.button,
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
     button: {
         width: 48,
         height: 48,
+        flexShrink: 0,
         borderRadius: 24,
         alignItems: "center",
         justifyContent: "center",

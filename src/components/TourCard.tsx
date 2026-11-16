@@ -1,13 +1,16 @@
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import StarIcon from "@/components/icons/StarIcon";
 import { travelColors } from "@/constants/travel-theme";
-import { useState } from "react";
+import { router } from "expo-router";
+import { useFavorites } from "@/context/FavoritesContext";
 
 import CircleButton from "@/components/CircleButton";
 import HeartIcon from "@/components/icons/HeartIcon";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 type TourCardProps = {
+  id: string;
+  fullWidth?: boolean;
   image: number;
   name: string;
   days: number;
@@ -17,6 +20,8 @@ type TourCardProps = {
 };
 
 export default function TourCard({
+  id,
+  fullWidth = false,
   image,
   name,
   days,
@@ -25,17 +30,22 @@ export default function TourCard({
   reviews,
 }: TourCardProps) {
 
-  const [saved, setSaved] = useState(false);
+  const { savedIds, toggleFavorite } = useFavorites();
+  const saved = savedIds.includes(id);
+  const openTour = () => router.push({ pathname: "/tour/[id]", params: { id } });
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, fullWidth && styles.fullWidth]}>
       <View style={styles.photoContainer}>
-        <Image source={image} style={styles.photo} />
+        <Pressable accessibilityRole="button" accessibilityLabel={`Open ${name} tour`} onPress={openTour}>
+          <Image source={image} style={styles.photo} />
+        </Pressable>
 
         <View style={styles.saveButton}>
           <CircleButton
-            label={saved ? "Remove saved tour" : "Save tour"}
-            onPress={() => setSaved(current => !current)}
+            label={saved ? `Remove ${name} from favourites` : `Save ${name}`}
+            selected={saved}
+            onPress={() => toggleFavorite(id, name)}
           >
             <HeartIcon
               size={24}
@@ -46,7 +56,9 @@ export default function TourCard({
         </View>
       </View>
 
-      <Text style={styles.name}>{name}</Text>
+      <Pressable accessibilityRole="button" accessibilityLabel={`View details for ${name}`} onPress={openTour}>
+        <Text style={styles.name}>{name}</Text>
+      </Pressable>
 
       <Text style={styles.details}>
         {days} days · From ${price}/person
@@ -61,9 +73,7 @@ export default function TourCard({
         <CircleButton
           label={`View ${name} tour`}
           backgroundColor={travelColors.text}
-          onPress={() =>
-            Alert.alert(name, "We will build the tour details screen later.")
-          }
+          onPress={openTour}
         >
           <ArrowRightIcon color={travelColors.surface} />
         </CircleButton>
@@ -79,6 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     backgroundColor: travelColors.surface,
   },
+  fullWidth: { width: "100%" },
   photo: {
     width: "100%",
     height: 180,

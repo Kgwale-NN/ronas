@@ -1,74 +1,48 @@
-import { View, Alert, Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
 import CircleButton from "./CircleButton";
 import HeartIcon from "@/components/icons/HeartIcon";
 import BackIcon from "@/components/icons/BackIcon";
+import { useFavorites } from "@/context/FavoritesContext";
+import { travelColors } from "@/constants/travel-theme";
 
-type detinationHeaderProps = {
+type DestinationHeaderProps = {
+  image: number;
+  favoriteId: string;
+  name: string;
+};
 
-    image: number
-}
+export default function DestinationHeaderImage({ image, favoriteId, name }: DestinationHeaderProps) {
+  const { savedIds, toggleFavorite } = useFavorites();
+  const saved = savedIds.includes(favoriteId);
 
-export default function DestinationHeaderImage({ image }: detinationHeaderProps) {
-
-
-    return (
-
-        <View style={styles.header}>
-
-            <Image source={image} style={styles.photo} />
-
-            <View style={styles.buttons}>
-
-                <CircleButton
-                    label="Go back"
-                    onPress={() =>
-                        Alert.alert("Back", "We will add navigation later.")
-                    }
-                >
-                    <BackIcon size={24} color="#191D1C" />                </CircleButton>
-
-                <CircleButton
-                    label="Save destination"
-                    onPress={() =>
-                        Alert.alert("Saved", "You tapped the heart button.")
-                    }
-                >
-                    <HeartIcon size={24} color="#191D1C" />
-                </CircleButton>
-
-            </View>
-
-        </View>
-    );
-
+  return (
+    <View style={styles.header}>
+      <Image source={image} accessibilityLabel={`${name} landscape`} style={styles.photo} />
+      <View style={styles.buttons}>
+        <CircleButton label="Go back" onPress={() => {
+          if (router.canGoBack()) router.back();
+          else router.replace("/tours");
+        }}>
+          <BackIcon color={travelColors.text} />
+        </CircleButton>
+        <CircleButton
+          label={saved ? `Remove ${name} from favourites` : `Save ${name}`}
+          selected={saved}
+          onPress={() => toggleFavorite(favoriteId, name)}
+        >
+          <HeartIcon color={travelColors.text} filled={saved} />
+        </CircleButton>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-
-    header: {
-
-        height: 300,
-        position: "relative"
-    },
-
-    photo: {
-
-        width: "100%",
-        height: 300,
-        resizeMode: "cover"
-    },
-
-
-
-    buttons: {
-
-        position: "absolute",
-        top: 16,
-        left: 20,
-        right: 20,
-        flexDirection: "row",
-        justifyContent: "space-between"
-
-    }
-
-})
+  header: { height: 300, position: "relative" },
+  photo: { width: "100%", height: "100%", resizeMode: "cover" },
+  buttons: {
+    position: "absolute", top: 16, left: 20, right: 20,
+    flexDirection: "row", justifyContent: "space-between",
+  },
+});
