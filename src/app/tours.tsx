@@ -1,13 +1,15 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import CircleButton from "@/components/CircleButton";
 import BackIcon from "@/components/icons/BackIcon";
 import TourCard from "@/components/TourCard";
-import { tours } from "@/data/tours";
+import { destinations, getUpcomingTours } from "@/data/tours";
 import { travelColors } from "@/constants/travel-theme";
 
 export default function ToursScreen() {
+  const { destination } = useLocalSearchParams<{ destination?: string }>();
+  const tours = destination ? getUpcomingTours(destination) : destinations;
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.heading}>
@@ -33,7 +35,7 @@ export default function ToursScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: travelColors.background },
-  heading: { flexDirection: "row", alignItems: "center", gap: 16, padding: 20 },
+  heading: { flexDirection: "row", alignItems: "center", gap: 16, padding: 20, width: "100%", maxWidth: 600, alignSelf: "center" },
   headingText: { flex: 1 },
   title: { fontSize: 24, fontWeight: "700", color: travelColors.text },
   subtitle: { fontSize: 14, color: travelColors.muted, marginTop: 4 },

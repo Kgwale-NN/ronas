@@ -1,4 +1,4 @@
-# Ronas â€” Travel Explorer
+# Ronas " Travel Explorer " 
 
 Ronas is a travel browsing app built while learning React Native. It helps users explore a destination, browse four sample tours, read tour details, and mark favourites.
 

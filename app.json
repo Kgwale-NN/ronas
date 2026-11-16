@@ -5,12 +5,13 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "ronas",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "ios": {
       "icon": "./assets/expo.icon"
     },
     "android": {
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.kgwalenn.ronas"
     },
     "web": {
       "output": "server"
@@ -23,11 +24,23 @@
           "backgroundColor": "#208AEF",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "0f295ee0-02e5-472a-909c-11a1708e46b8"
+      }
     }
   }
 }

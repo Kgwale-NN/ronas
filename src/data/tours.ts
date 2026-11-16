@@ -45,3 +45,23 @@ export const tours: Tour[] = [
     highlights: ["Gentle forest walks", "Lakeside views", "Quiet time in nature"],
   },
 ];
+
+export const rio: Tour = {
+  id: "rio",
+  image: require("../../assets/images/destination.jpg"),
+  name: "Rio de Janeiro",
+  location: "Brazil",
+  days: 6,
+  price: 599,
+  highlights: ["City sights", "Coastal walks"],
+  rating: 5,
+  reviews: 143,
+  description: "Rio de Janeiro, often simply called Rio, is one of Brazil's most iconic cities. Explore its beaches, mountain views, and lively neighbourhoods. Discover local food and enjoy the sights at your own pace.",
+};
+
+export const destinations: Tour[] = [rio, ...tours];
+
+// Always offer the other four destinations, never the one already open.
+export function getUpcomingTours(currentId: string): Tour[] {
+  return destinations.filter(tour => tour.id !== currentId);
+}
