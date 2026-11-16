@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { getUpcomingTours } from "@/data/tours";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { travelColors } from "@/constants/travel-theme";
 import DestinationHeaderImage from "@/components/DestinationHeader";
@@ -24,6 +24,8 @@ type DestinationDetailsProps = {
 
 export default function DestinationDetails({ destination }: DestinationDetailsProps) {
 
+  const { width, fontScale } = useWindowDimensions();
+  const compact = Math.min(width, 600) / fontScale < 350;
   const upcomingTours = getUpcomingTours(destination.id);
 
   return (
@@ -33,6 +35,7 @@ export default function DestinationDetails({ destination }: DestinationDetailsPr
       <ScrollView
 
         style={styles.scroll}
+        contentContainerStyle={styles.page}
         showsVerticalScrollIndicator={false}
 
       >
@@ -45,7 +48,7 @@ export default function DestinationDetails({ destination }: DestinationDetailsPr
 
           <View style={styles.content}>
 
-            <View style={styles.destinationRow}>
+            <View style={[styles.destinationRow, compact && styles.compactRow]}>
 
               <View style={styles.destinationInfo}>
 
@@ -56,7 +59,7 @@ export default function DestinationDetails({ destination }: DestinationDetailsPr
 
               </View>
 
-              <View style={styles.ratingInfo}>
+              <View style={[styles.ratingInfo, compact && styles.compactRating]}>
 
                 <RatingBadge rating={destination.rating} />
                 <Text style={styles.reviews}>{destination.reviews} reviews</Text>
@@ -98,6 +101,9 @@ export default function DestinationDetails({ destination }: DestinationDetailsPr
 }
 
 const styles = StyleSheet.create({
+  page: { width: "100%", maxWidth: 600, alignSelf: "center", paddingBottom: 16 },
+  compactRow: { flexDirection: "column" },
+  compactRating: { flexDirection: "row", alignItems: "center", flexWrap: "wrap" },
 
   destinationRow: {
     flexDirection: "row",
@@ -117,7 +123,6 @@ const styles = StyleSheet.create({
   reviews: {
     fontSize: 14,
     color: travelColors.text,
-    textDecorationLine: "underline",
   },
 
   scroll: {

@@ -1,4 +1,6 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Image, Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import TextAction from "@/components/TextAction";
 import StarIcon from "@/components/icons/StarIcon";
 import { travelColors } from "@/constants/travel-theme";
 import { router } from "expo-router";
@@ -30,14 +32,20 @@ export default function TourCard({
   reviews,
 }: TourCardProps) {
 
+  const { width } = useWindowDimensions();
+  const cardWidth = Math.min(280, Math.max(200, width - 64));
+  const [photoHovered, setPhotoHovered] = useState(false);
   const { savedIds, toggleFavorite } = useFavorites();
   const saved = savedIds.includes(id);
   const openTour = () => router.push({ pathname: "/tour/[id]", params: { id } });
 
   return (
-    <View style={[styles.card, fullWidth && styles.fullWidth]}>
+    <View style={[styles.card, { width: cardWidth }, fullWidth && styles.fullWidth]}>
       <View style={styles.photoContainer}>
-        <Pressable accessibilityRole="button" accessibilityLabel={`Open ${name} tour`} onPress={openTour}>
+        <Pressable accessibilityRole="button" accessibilityLabel={`Open ${name} tour`} onPress={openTour}
+          onHoverIn={() => setPhotoHovered(true)} onHoverOut={() => setPhotoHovered(false)}
+          onFocus={() => setPhotoHovered(true)} onBlur={() => setPhotoHovered(false)}
+          style={({ pressed }) => [styles.photoButton, (photoHovered || pressed) && styles.photoActive]}>
           <Image source={image} style={styles.photo} />
         </Pressable>
 
@@ -56,9 +64,7 @@ export default function TourCard({
         </View>
       </View>
 
-      <Pressable accessibilityRole="button" accessibilityLabel={`View details for ${name}`} onPress={openTour}>
-        <Text style={styles.name}>{name}</Text>
-      </Pressable>
+      <TextAction label={name} onPress={openTour} textStyle={styles.name} />
 
       <Text style={styles.details}>
         {days} days · From ${price}/person
@@ -90,6 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: travelColors.surface,
   },
   fullWidth: { width: "100%" },
+  photoButton: { borderRadius: 18, overflow: "hidden", backgroundColor: travelColors.hoverSurface },
+  photoActive: { opacity: 0.8 },
   photo: {
     width: "100%",
     height: 180,
@@ -100,9 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: travelColors.text,
-    marginTop: 10,
-    marginHorizontal: 4,
-    marginBottom: 8,
+    textDecorationLine: "none",
   },
 
   details: {

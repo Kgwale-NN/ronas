@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
 import { Pressable, StyleSheet } from "react-native";
 
@@ -18,15 +19,23 @@ export default function CircleButton({
     backgroundColor = travelColors.surface,
     selected,
 }: CircleButtonProps) {
+    const [hovered, setHovered] = useState(false);
+    const [focused, setFocused] = useState(false);
+    const activeColor = backgroundColor === travelColors.text
+        ? travelColors.hoverDark : travelColors.hoverSurface;
     return (
         <Pressable
             accessibilityRole="button"
             accessibilityLabel={label}
             accessibilityState={selected === undefined ? undefined : { selected }}
             onPress={onPress}
+            onHoverIn={() => setHovered(true)}
+            onHoverOut={() => setHovered(false)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             style={({ pressed }) => [
                 styles.button,
-                { backgroundColor },
+                { backgroundColor: hovered || focused || pressed ? activeColor : backgroundColor },
                 pressed && styles.pressed,
             ]}
         >

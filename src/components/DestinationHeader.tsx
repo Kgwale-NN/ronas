@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, useWindowDimensions } from "react-native";
 import { router } from "expo-router";
 import CircleButton from "./CircleButton";
 import HeartIcon from "@/components/icons/HeartIcon";
@@ -13,11 +13,12 @@ type DestinationHeaderProps = {
 };
 
 export default function DestinationHeaderImage({ image, favoriteId, name }: DestinationHeaderProps) {
+  const { width } = useWindowDimensions();
   const { savedIds, toggleFavorite } = useFavorites();
   const saved = savedIds.includes(favoriteId);
 
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, { height: width < 350 ? 260 : 300 }]}>
       <Image source={image} accessibilityLabel={`${name} landscape`} style={styles.photo} />
       <View style={styles.buttons}>
         <CircleButton label="Go back" onPress={() => {
