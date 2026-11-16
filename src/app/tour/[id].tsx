@@ -2,12 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, useLocalSearchParams } from "expo-router";
 import DestinationDetails from "@/components/DestinationDetails";
-import { tours } from "@/data/tours";
+import { destinations } from "@/data/tours";
 import { travelColors } from "@/constants/travel-theme";
 
 export default function TourDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const tour = tours.find(item => item.id === id);
+  const tour = destinations.find(item => item.id === id);
 
   if (!tour) {
     return (

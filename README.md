@@ -1,4 +1,4 @@
-# Ronas — Travel Explorer
+# Ronas â€” Travel Explorer
 
 Ronas is a travel browsing app built while learning React Native. It helps users explore a destination, browse four sample tours, read tour details, and mark favourites.
 
@@ -21,7 +21,8 @@ These are screenshots of the running web app at a phone-sized viewport, not iOS 
 - Heart buttons that fill when saved and show an alert when saved or removed.
 - Shared favourites: a tour's card and details header show the same saved state.
 - Tour photos, names, and arrow buttons open that tour's details screen.
-- **See all** opens a vertically scrolling list of every tour.
+- Upcoming cards exclude the open destination. Opening Iconic Brazil from Rio replaces the Iconic Brazil card with Rio.
+- **See all** shows the same available alternatives; opening the list directly shows all five destinations.
 - Every tour opens the same destination layout as Rio: photo header, rounded panel, location, rating, description, and sideways upcoming-tour cards.
 - Back buttons return to the previous screen. Directly opened pages have a fallback destination.
 - Friendly fallback for an unknown tour ID.
@@ -30,6 +31,7 @@ These are screenshots of the running web app at a phone-sized viewport, not iOS 
 
 This is a learning project with local sample data. It is not a booking service.
 
+- The Rio card uses a sample duration of 6 days and a sample price of $599.
 - Prices are example amounts in **USD per person**.
 - Ratings, review counts, descriptions, and highlights are sample content.
 - Photos are illustrative and may not show the destination named in the app.
@@ -140,7 +142,7 @@ src/
     icons/                     Central Icons adapted to SVG components
   constants/travel-theme.ts    Shared colours
   context/FavoritesContext.tsx Shared saved IDs and confirmation alerts
-  data/tours.ts                All four tours and their details
+  data/tours.ts                Rio and the four tours, plus the upcoming-list rule
 ```
 
 `[id].tsx` is a dynamic route. One screen displays different tours by reading an ID such as `iconic-brazil` from the route. We do not need four copies of the details screen.
